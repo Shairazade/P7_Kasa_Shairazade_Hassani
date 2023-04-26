@@ -5,10 +5,10 @@ const Navigation = () => {
     return (
         <div className='navigation'>
             <ul>
-                <NavLink to="/" className>
+                <NavLink to="/" className="nav-home">
                     <li>Accueil</li>
                 </NavLink>
-                <NavLink to="/about" className>
+                <NavLink to="/about" className="nav-about">
                     <li>A propos</li>
                 </NavLink>
             </ul>
