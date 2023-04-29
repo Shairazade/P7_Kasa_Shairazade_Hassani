@@ -1,11 +1,16 @@
 import React from 'react';
-import Navigation from '../components/Nav/navigation';
+import Banner from "../components/Banner/Banner";
+
 
 const Home = () => {
     return (
         <div>
-            <Navigation />
-            <h1>Accueil</h1>
+           <Banner>
+            <div className='cards-container'>
+
+            </div>
+           </Banner>
+            
         </div>
     );
 };
