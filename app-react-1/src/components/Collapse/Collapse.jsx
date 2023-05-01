@@ -1,39 +1,37 @@
-import React, { useState, useRef, useEffect } from "react"; //import des hooks de base react
-import Chevron from "../../assets/images/VectorDown.svg";
+import React, { useState, useRef, useEffect } from "react"; // Import des hooks de base React
+import Chevron from "../../assets/images/VectorDown.svg"; 
 
 export default function Collapse(props) {
-	const [toggle, setToggle] = useState(false); // je definie le state du toggle (et false par défaut)
-	const [heightEl, setHeightEl] = useState(); // je definie le state de la hauteur du collapse
+  const [toggle, setToggle] = useState(false); // Initialisation du state toggle à false avec le setter setToggle
+  const [heightEl, setHeightEl] = useState(); // Initialisation du state heightEl avec le setter setHeightEl
 
-	const toggleState = () => {
-		//je définie la fonction toggleState qui modifie la valeur toggle au clic
-		setToggle(!toggle);
-	};
+  const toggleState = () => { // Définition d'une fonction toggleState qui change la valeur de toggle
+    setToggle(!toggle); 
+  };
 
-	const refHeight = useRef(); //récupère et conserve la valeur de hauteur du collapse déplié
+  const refHeight = useRef(); 
 
-	useEffect(() => {
-		setHeightEl(`${refHeight.current.scrollHeight}px`); //useEffect s'éxécute au montage du composant, dans ce cas, il définit la hauteur du collapse déplié lors de sa première ouverture et la conserve dans refHeight
-	}, []);
+  useEffect(() => { 
+    setHeightEl(`${refHeight.current.scrollHeight}px`); // Modification de la hauteur de l'élément en fonction de sa hauteur réelle
+  }, []);
 
-	return (
-		// affiche le collapse replié par défaut et l'ouvre au clic puis le referme au clic en faisant disparaitre le texte et le style
-		<div className={`collapse ${props.aboutStyle}`}>
-			<div onClick={toggleState} className="collapse__visible">
-				<h2>{props.aboutTitle}</h2>
-				<img
-					className={toggle ? "chevron rotated" : "chevron"}
-					src={Chevron}
-					alt="chevron"
-				/>
-			</div>
-			<div
-				ref={refHeight}
-				className={toggle ? "collapse__toggle animated" : "collapse__toggle"}
-				style={{ height: toggle ? `${heightEl}` : "0px" }}
-			>
-				<p aria-hidden={toggle ? "true" : "false"}>{props.aboutText}</p>
-			</div>
-		</div>
-	);
+  return (
+    <div className={`collapse ${props.aboutStyle}`}> {/* Affichage conditionnel de la classe CSS "collapse" avec une classe additionnelle "aboutStyle" si elle est fournie dans les props */}
+      <div onClick={toggleState} className="collapse__visible"> 
+        <h2>{props.aboutTitle}</h2> 
+        <img
+          className={toggle ? "chevron rotated" : "chevron"} // Ajout de la classe "rotated" si la valeur de toggle est true pour afficher le chevron en position ouverte
+          src={Chevron}
+          alt="chevron"
+        />
+      </div>
+      <div
+        ref={refHeight} 
+        className={toggle ? "collapse__toggle animated" : "collapse__toggle"} // Affichage conditionnel de la classe CSS "collapse__toggle" avec une classe additionnelle "animated" si la valeur de toggle est true
+        style={{ height: toggle ? `${heightEl}` : "0px" }} 
+      >
+        <p aria-hidden={toggle ? "true" : "false"}>{props.aboutText}</p> {/* Affichage du texte du composant fourni dans les props */}
+      </div>
+    </div>
+  );
 }
