@@ -23,10 +23,12 @@ export default function FicheLogement() {
 		};
 		getData();
 		// eslint-disable-next-line
-	}, []); // array vide du useEffect pour ne lancer qu'une seule fois
+	}, []); // Le useEffect ne doit être exécuté qu'une seule fois (tableau de dépendances vide)
+	
+	
 	const slidePics = pickedAppart && pickedAppart.pictures;
 	const tags = pickedAppart && pickedAppart.tags;
-	const equipments = pickedAppart && pickedAppart.equipments;
+	const equipments = pickedAppart && pickedAppart.equipments; // Récupération des équipements du logement sélectionné et création d'un élément <li> pour chaque équipement
 	const equip =
 		pickedAppart &&
 		equipments.map((item, index) => (
@@ -34,6 +36,7 @@ export default function FicheLogement() {
 				{item}
 			</li>
 		));
+	// Retourne le code JSX suivant si pickedAppart est défini : 
 	return (
 		pickedAppart && (
 			<div key={params.id} className="fiche-container">
